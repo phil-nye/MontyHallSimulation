@@ -58,7 +58,7 @@ class GameShow:
     def always_change(self, wrong):
         new_choice = 1
 
-        while new_choice != self.choice and new_choice != wrong:
+        while new_choice == self.choice or new_choice == wrong:
             new_choice += 1
 
         return new_choice
@@ -98,11 +98,12 @@ class GameShow:
         for x in range(trials):
             self.door = self.set_door()     # reset door placement
             self.choice = rnd.randint(1, 3)
-            wrong = self.get_wrong()
 
             if method == 2:
+                wrong = self.get_wrong()
                 self.choice = self.rand_change(wrong)
             elif method == 1:
+                wrong = self.get_wrong()
                 self.choice = self.always_change(wrong)
             # keep choice if "no change" method (0)
 
@@ -119,6 +120,6 @@ g.autoplay(0, 1000000)
 print("Always Change")
 g = GameShow()
 g.autoplay(1, 1000000)
-print("Randomly Change")
-g = GameShow()
-g.autoplay(2, 1000000)
+# print("Randomly Change")
+# g = GameShow()
+# g.autoplay(2, 1000000)
