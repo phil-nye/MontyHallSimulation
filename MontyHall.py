@@ -105,10 +105,13 @@ class GameShow:
             self.get_wrong()
 
             if method == 2:
+                print('Change Randomly')
                 self.rand_change()
             elif method == 1:
+                print('Always Change')
                 self.always_change()
-            # keep choice if "no change" method (0)
+            else:
+                print('No Change (by default)')
 
             # print(x, "\b:", self.get_door(), ",", self.get_choice())
             self.check_win()
