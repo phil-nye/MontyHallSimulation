@@ -16,7 +16,6 @@ class GameShow:
     def set_door(self):
         rnd.shuffle(self.doors)
         self.reward = self.doors.index('reward')
-        self.player_choice()
         self.host = 'reward'
 
     # only enable if you want user input
@@ -70,6 +69,7 @@ class GameShow:
 
             print("There are three doors. Only one of these doors has a reward behind it. Choose wisely...")
             self.set_door()
+            self.player_choice()
 
             self.set_wrong()
             print("Here is a clue. There is no reward behind Door", self.get_wrong())
@@ -116,10 +116,10 @@ class GameShow:
 
 print("No Change")
 g = GameShow()
-g.autoplay(0, 10)
+g.autoplay(0, 1000000)
 print("Always Change")
 g = GameShow()
-g.autoplay(1, 10)
-# print("Randomly Change")
-# g = GameShow()
-# g.autoplay(2, 1000000)
+g.autoplay(1, 1000000)
+print("Randomly Change")
+g = GameShow()
+g.autoplay(2, 1000000)
