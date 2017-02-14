@@ -7,40 +7,35 @@ class GameShow:
     total = 0
 
     def __init__(self):
-        self.door = 0
-        self.choice = 0
+        self.doors = ['reward', 'nothing a', 'nothing b']
+        self.host = ''
+        self.reward = ''
+        self.player = ''
+        self.set_door()
 
-    @staticmethod
-    def set_door():
-        return rnd.randint(1, 3)
+    def set_door(self):
+        rnd.shuffle(self.doors)
+        self.host = 'reward'
 
     # only enable if you want user input
     def player_choice(self):
-        self.choice = input('Enter (1, 2, or 3): ')
+        decision = input('Enter (1, 2, or 3): ')
 
         # loop if invalid input
-        while self.choice != 3 and self.choice != 2 and self.choice != 1:
-            self.choice = input('Enter (1, 2, or 3): ')
-
-    def get_door(self):
-        return self.door
-
-    def get_choice(self):
-        return self.choice
+        while decision != 3 and decision != 2 and decision != 1:
+            decision = input('Enter (1, 2, or 3): ')
+            
+        self.player = self.doors[decision]
 
     def get_wrong(self):       # this method is suboptimal
-        wrong = rnd.randint(1, 3)
-
-        # loop if you are showing the correct door or the player's choice
-        while wrong == self.get_door or wrong == self.choice:
-            wrong = rnd.randint(1, 3)
-
-        return wrong
+        # pick a wrong door that has not been chosen, yet
+        while self.host == 'reward' or self.host == self.player:
+            self.host = rnd.choice(self.doors)
 
     def check_win(self):
-        if self.choice == self.door:
+        if self.player == 'reward':
             self.win_count += 1
-        elif self.choice != self.door:
+        else:
             self.lose_count += 1
 
         self.total += 1
