@@ -122,7 +122,7 @@ class GameShow:
         g.autoplay(method, trials)
         
     @staticmethod
-    def game()
+    def game():
         g = GameShow()
         g.play()
 
